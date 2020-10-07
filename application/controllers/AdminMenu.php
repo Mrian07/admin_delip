@@ -254,26 +254,27 @@ class AdminMenu extends CI_Controller
         }
     }
 
-    public function hapususers($id)
+    
+    
+    // BARUUU
+    
+    public function hapusAdmin($id)
     {
         if (demo == TRUE) {
             $this->session->set_flashdata('demo', 'NOT ALLOWED FOR DEMO');
             redirect('users/index');
         } else {
-            $data = $this->user->getusersbyid($id);
-            $gambar = $data['fotopelanggan'];
-            unlink('images/pelanggan/' . $gambar);
+            $data = $this->admin->getAdminByID($id);
+            // var_dump($data['image']);die;
+            $gambar = $data['image'];
+            unlink('images/admin/' . $gambar);
 
-            $this->user->hapusdatauserbyid($id);
+            $this->admin->hapusAdminByID($id);
 
-            $this->session->set_flashdata('hapus', 'User Has Been Deleted');
-            redirect('users/index');
+            $this->session->set_flashdata('hapus', 'Admin Has Been Deleted');
+            redirect('AdminMenu/index');
         }
     }
-
-
-    // BARUUU
-
       public function ubahSuper($id)
     {
         $this->admin->ubahKeSuperAdmin($id);

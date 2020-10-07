@@ -86,7 +86,7 @@
                                                                             <button class="btn btn-outline-dark text-dark mr-2"> Admin</button>
                                                                         </a>
                                                                     <?php } ?>
-                                                                    <a href="<?= base_url(); ?>users/hapususers/<?= $us['id'] ?>">
+                                                                    <a href="<?= base_url(); ?>AdminMenu/hapusAdmin/<?= $us['id'] ?>">
                                                                         <button onclick="return confirm ('Are You Sure?')" class="btn btn-outline-danger text-red mr-2">Hapus</button>
                                                                     </a>
                                                                 </td>
@@ -116,44 +116,42 @@
                                                     <thead>
                                                         <tr>
                                                             <th>No</th>
-                                                            <th>User Id</th>
+                                                            <th>Admin Id</th>
                                                             <th>Photo Profil</th>
                                                             <th>Nama</th>
                                                             <th>Email</th>
-                                                            <th>No hp</th>
                                                             <th>Status</th>
                                                             <th>Tindakan</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         <?php $i = 1;
-                                                        foreach ($user as $us) {
-                                                            if ($us['status'] == 0) { ?>
+                                                        foreach ($admin as $us) {
+                                                            if ($us['admin_role'] == 0) { ?>
                                                                 <tr>
                                                                     <td><?= $i ?></td>
                                                                     <td><?= $us['id'] ?></td>
                                                                     <td>
-                                                                        <img src="<?= base_url('images/pelanggan/') . $us['fotopelanggan']; ?>">
+                                                                        <img src="<?= base_url('images/admin/') . $us['image']; ?>">
                                                                     </td>
-                                                                    <td><?= $us['fullnama'] ?></td>
+                                                                    <td><?= $us['user_name'] ?></td>
                                                                     <td><?= $us['email'] ?></td>
-                                                                    <td><?= $us['no_telepon'] ?></td>
                                                                     <td>
-                                                                        <?php if ($us['status'] == 1) { ?>
-                                                                            <label class="badge badge-success">Aktif</label>
+                                                                        <?php if ($us['admin_role'] == 1) { ?>
+                                                                            <label class="badge badge-success">Super Admin</label>
                                                                         <?php } else { ?>
-                                                                            <label class="badge badge-dark">Blocked</label>
+                                                                            <label class="badge badge-dark">Admin</label>
                                                                         <?php } ?>
                                                                     </td>
                                                                     <td>
                                                                         <a href="<?= base_url(); ?>users/detail/<?= $us['id'] ?>">
                                                                             <button class="btn btn-outline-primary mr-2">Lihat</button>
                                                                         </a>
-                                                                        <a href="<?= base_url(); ?>users/userunblock/<?= $us['id'] ?>">
-                                                                            <button class="btn btn-outline-success text-red mr-2">Unblock</button>
+                                                                        <a href="<?= base_url(); ?>AdminMenu/ubahSuper/<?= $us['id'] ?>">
+                                                                            <button class="btn btn-outline-success text-red mr-2">Super Admin</button>
                                                                         </a>
 
-                                                                        <a href="<?= base_url(); ?>users/hapususers/<?= $us['id'] ?>">
+                                                                        <a href="<?= base_url(); ?>AdminMenu/hapusAdmin/<?= $us['id'] ?>">
                                                                             <button class="btn btn-outline-danger text-red mr-2">Hapus</button>
                                                                         </a>
                                                                     </td>

@@ -27,6 +27,21 @@ public function login(){
         $this->db->set('admin_role', 1);
         $this->db->where('id', $id);
         $this->db->update('admin');
+    } 
+      public function hapusAdminByID($id)
+    {
+        $this->db->where('id', $id);
+        $this->db->delete('admin');
+
+    }
+        public function getAdminByID($id)
+    {
+     $this->db->select('*');
+     $this->db->from('admin');
+     $this->db->where('id', $id);
+     
+     
+        return  $this->db->get()->row_array();
     }
 
 

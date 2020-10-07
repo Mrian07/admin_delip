@@ -102,9 +102,9 @@
                                 <?= form_close(); ?>
                             </div>
                             <div class="tab-pane fade" id="avatar" role="tabpanel" aria-labelledby="avatar-tab">
-                                <?= form_open_multipart('users/ubahfoto'); ?>
+                                <?= form_open_multipart('AdminMenu/ubahfoto'); ?>
                                 <input type="hidden" name="id" value="<?= $admin['id'] ?>">
-                                <input type="file" name="fotopelanggan" class="dropify" data-max-file-size="1mb" data-default-file="<?= base_url('images/admin/') . $admin['image'] ?>" />
+                                <input type="file" name="image" class="dropify" data-max-file-size="1mb" data-default-file="<?= base_url('images/admin/') . $admin['image'] ?>" />
                                 <div class="form-group mt-5">
                                     <button type="submit" class="btn btn-success mr-2">Perbarui</button>
                                     <button class="btn btn-outline-danger">Batal</button>

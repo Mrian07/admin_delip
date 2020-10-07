@@ -46,51 +46,7 @@ class AdminMenu extends CI_Controller
 
    
 
-    public function ubahfoto()
-    {
-
-        $config['upload_path']     = './images/pelanggan/';
-        $config['allowed_types'] = 'gif|jpg|png|jpeg';
-        $config['max_size']         = '100000';
-        $config['file_name']     = 'name';
-        $config['encrypt_name']     = true;
-        $this->load->library('upload', $config);
-        $id = $id = html_escape($this->input->post('id', TRUE));
-        $data = $this->user->getusersbyid($id);
-
-        if ($this->upload->do_upload('fotopelanggan')) {
-            if ($data['fotopelanggan'] != 'noimage.jpg') {
-                $gambar = $data['fotopelanggan'];
-                unlink('images/pelanggan/' . $gambar);
-            }
-
-            $foto = html_escape($this->upload->data('file_name'));
-
-            $data = [
-                'fotopelanggan'       => $foto,
-                'id'        => html_escape($this->input->post('id', TRUE))
-            ];
-
-            if (demo == TRUE) {
-                $this->session->set_flashdata('demo', 'NOT ALLOWED FOR DEMO');
-                redirect('users/detail/' . $id);
-            } else {
-                $this->user->ubahdatafoto($data);
-                $this->session->set_flashdata('ubah', 'User Has Been Change');
-                redirect('users/detail/' . $id);
-            }
-        } else {
-
-            $data = $this->user->getcurrency();
-            $data['user'] = $this->user->getusersbyid($id);
-            $data['countorder'] = $this->user->countorder($id);
-            // $data['transaksi']= $this->dashboard->getAlltransaksi();
-            // $data['fitur']= $this->dashboard->getAllfitur();
-            $this->load->view('includes/header');
-            $this->load->view('users/detailusers', $data);
-            $this->load->view('includes/footer');
-        }
-    }
+   
 
     public function ubahpass()
     {
@@ -269,6 +225,51 @@ class AdminMenu extends CI_Controller
             } else {
                 $this->admin->ubahAdminByID($data);
                 $this->session->set_flashdata('ubah', 'User Has Been Change');
+                redirect('AdminMenu/detail/' . $id);
+            }
+        } else {
+
+            $data = $this->user->getcurrency();
+            $data['user'] = $this->user->getusersbyid($id);
+            $data['countorder'] = $this->user->countorder($id);
+            // $data['transaksi']= $this->dashboard->getAlltransaksi();
+            // $data['fitur']= $this->dashboard->getAllfitur();
+            $this->load->view('includes/header');
+            $this->load->view('users/detailusers', $data);
+            $this->load->view('includes/footer');
+        }
+    }
+     public function ubahfoto()
+    {
+
+        $config['upload_path']     = './images/admin/';
+        $config['allowed_types'] = 'gif|jpg|png|jpeg';
+        $config['max_size']         = '100000';
+        $config['file_name']     = 'name';
+        $config['encrypt_name']     = true;
+        $this->load->library('upload', $config);
+        $id = $id = html_escape($this->input->post('id', TRUE));
+        $data = $this->admin->getAdminByID($id);
+
+        if ($this->upload->do_upload('image')) {
+            if ($data['image'] != 'noimage.jpg') {
+                $gambar = $data['image'];
+                unlink('images/admin/' . $gambar);
+            }
+
+            $foto = html_escape($this->upload->data('file_name'));
+
+            $data = [
+                'image'       => $foto,
+                'id'        => html_escape($this->input->post('id', TRUE))
+            ];
+
+            if (demo == TRUE) {
+                $this->session->set_flashdata('demo', 'NOT ALLOWED FOR DEMO');
+                redirect('AdminMenu/detail/' . $id);
+            } else {
+                $this->admin->ubahdatafoto($data);
+                $this->session->set_flashdata('ubah', 'Admin Has Been Change');
                 redirect('AdminMenu/detail/' . $id);
             }
         } else {

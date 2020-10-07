@@ -75,7 +75,10 @@
                         $query = $this->db->query($sql)->result();
                         $SuperAdmin = $query[0]->admin_role;
                         // var_dump($SuperAdmin);
-                    if($SuperAdmin){
+
+
+                    if($SuperAdmin==0){
+                    // if($SuperAdmin){
                         
                     
 
@@ -267,20 +270,6 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
-                                <i class="icon-wallet menu-icon"></i>
-                                <span class="menu-title">Keuangan</span>
-                                <span class="badge badge-white"><i class="mdi mdi-menu-down mdi-24px text-primary"></i></span>
-                            </a>
-                            <div class="collapse" id="tables">
-                                <ul class="nav flex-column sub-menu">
-                                    <li class="nav-item"> <a class="nav-link" href="<?= base_url(); ?>wallet">Saldo</a></li>
-                                    <li class="nav-item"> <a class="nav-link" href="<?= base_url(); ?>wallet/tambahtopup">TopUp Manual</a></li>
-                                    <li class="nav-item"> <a class="nav-link" href="<?= base_url(); ?>wallet/tambahwithdraw">Withdraw Manual</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" data-toggle="collapse" href="#drivers" aria-expanded="false" aria-controls="drivers">
                                 <i class="icon-people menu-icon"></i>
                                 <span class="menu-title">Driver</span>
@@ -326,48 +315,6 @@
                                     <li class="nav-item"> <a class="nav-link" href="<?= base_url(); ?>partnerjob">Tipe Kendaraan</a></li>
                                 </ul>
                             </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?= base_url(); ?>promocode">
-                                <i class="icon-tag menu-icon"></i>
-                                <span class="menu-title">Promo Kode</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?= base_url(); ?>promoslider">
-                                <i class="icon-screen-smartphone menu-icon"></i>
-                                <span class="menu-title">Slider</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?= base_url(); ?>news">
-                                <i class="icon-docs menu-icon"></i>
-                                <span class="menu-title">Berita</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?= base_url(); ?>sendemail">
-                                <i class="icon-envelope-letter menu-icon"></i>
-                                <span class="menu-title">Kirim Email</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?= base_url(); ?>appnotification">
-                                <i class="icon-paper-plane menu-icon"></i>
-                                <span class="menu-title">Pemberitahuan</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?= base_url(); ?>appsettings">
-                                <i class="icon-settings menu-icon"></i>
-                                <span class="menu-title">Pengaturan</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?= base_url(); ?>admin">
-                                <i class="icon-user-following menu-icon"></i>
-                                <span class="menu-title">Admin</span>
-                            </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="<?= base_url(); ?>profile">

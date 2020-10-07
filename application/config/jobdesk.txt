@@ -1,1 +1,7 @@
-jobdesknya, mas buatkan multi role untu admin hanya bisa mengelola beberapa saja, seperti pendaftaran driver, customer, dan merchant, dan tidak bisa menghapus data transaksi, dan di menu buatkan add admin buat tampilan value wilayah, nama, email, nomor hp, dan password, dan admin bisa ganti paswordnya masing2
+jobdesknya, mas buatkan multi role untu admin hanya bisa mengelola beberapa saja, seperti 
+pendaftaran driver, 
+customer, 
+dan merchant, 
+dan tidak bisa menghapus data transaksi, 
+
+dan di menu buatkan add admin buat tampilan value wilayah, nama, email, nomor hp, dan password, dan admin bisa ganti paswordnya masing2

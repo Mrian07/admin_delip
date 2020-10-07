@@ -29,17 +29,6 @@ class AdminMenu extends CI_Controller
         $this->load->view('includes/footer');
     }
 
-    public function detail($id)
-    {
-        $data = $this->user->getcurrency();
-        $data['user'] = $this->user->getusersbyid($id);
-        $data['countorder'] = $this->user->countorder($id);
-        $data['wallet'] = $this->user->wallet($id);
-        // $data['fitur']= $this->dashboard->getAllfitur();
-        $this->load->view('includes/header');
-        $this->load->view('users/detailusers', $data);
-        $this->load->view('includes/footer');
-    }
 
     public function block($id)
     {
@@ -279,5 +268,17 @@ class AdminMenu extends CI_Controller
     {
         $this->admin->ubahKeSuperAdmin($id);
         redirect('AdminMenu');
+    }
+    
+    public function detail($id)
+    {
+        $data = $this->user->getcurrency();
+        $data['user'] = $this->user->getusersbyid($id);
+        $data['countorder'] = $this->user->countorder($id);
+        $data['wallet'] = $this->user->wallet($id);
+        // $data['fitur']= $this->dashboard->getAllfitur();
+        $this->load->view('includes/header');
+        $this->load->view('Admin/detailusers', $data);
+        $this->load->view('includes/footer');
     }
 }

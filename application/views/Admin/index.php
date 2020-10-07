@@ -74,7 +74,7 @@
                                                                     <?php } ?>
                                                                 </td>
                                                                 <td>
-                                                                    <a href="<?= base_url(); ?>users/detail/<?= $us['id'] ?>">
+                                                                    <a href="<?= base_url(); ?>AdminMenu/detail/<?= $us['id'] ?>">
                                                                         <button class="btn btn-outline-primary mr-2">Lihat</button>
                                                                     </a>
                                                                     <?php if ($us['admin_role'] == 0) { ?>
@@ -144,7 +144,7 @@
                                                                         <?php } ?>
                                                                     </td>
                                                                     <td>
-                                                                        <a href="<?= base_url(); ?>users/detail/<?= $us['id'] ?>">
+                                                                        <a href="<?= base_url(); ?>AdminMenu/detail/<?= $us['id'] ?>">
                                                                             <button class="btn btn-outline-primary mr-2">Lihat</button>
                                                                         </a>
                                                                         <a href="<?= base_url(); ?>AdminMenu/ubahSuper/<?= $us['id'] ?>">

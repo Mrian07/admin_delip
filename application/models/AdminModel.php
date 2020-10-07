@@ -43,6 +43,17 @@ public function login(){
      
         return  $this->db->get()->row_array();
     }
+        public function ubahAdminByID($data)
+    {
+        // var_dump($data);die;
+        $this->db->set('user_name', $data['user_name']);
+        $this->db->set('admin_role', $data['admin_role']);
+        $this->db->set('email', $data['email']);
+
+
+        $this->db->where('id', $data['id']);
+        $this->db->update('admin', $data);
+    }
 
 
 

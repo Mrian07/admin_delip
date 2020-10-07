@@ -9,53 +9,24 @@
                         <div class="card-body avatar">
                             <div class="row">
                                 <h4 class="col-auto mr-auto card-title">Info Admin</h4>
-                                <a class="col-auto btn btn-danger text-white" href="<?= base_url() ?>users">
+                                <a class="col-auto btn btn-danger text-white" href="<?= base_url() ?>AdminMenu">
                                     <i class="mdi mdi-keyboard-backspace text-white"></i>Kembali</a>
                             </div>
-                            <img src="<?= base_url('images/pelanggan/') . $user['fotopelanggan']; ?>">
-                            <p class="name"><?= $user['fullnama'] ?></p>
-                            <h4 class="text-center text-primary">
-                                <i class="mdi mdi-wallet mr-1 text-primary "></i>Saldo</h4>
+                            <img src="<?= base_url('images/admin/') . $admin['image']; ?>">
+                            <p class="name"><?= $admin['user_name'] ?></p>
+                          
                             <p class="text-center">
-                                <?= $duit ?>
-                                <?= number_format($user['saldo'], 0, ".", ".") ?>
+                                <?= $admin['user_name'] ?>
                             </p>
-                            <span class="d-block text-center text-dark"><?= $user['email'] ?></span>
-                            <span class="d-block text-center text-dark"><?= $user['no_telepon'] ?></span>
+                            <span class="d-block text-center text-dark"><?= $admin['email'] ?></span>
+                            <!-- <span class="d-block text-center text-dark"><?= $admin['no_telepon'] ?></span> -->
                         </div>
                     </div>
                 </div>
                 <div class="col-12 stretch-card">
                     <div class="card">
                         <div class="card-body overview">
-                            <ul class="achivements">
-                                <li>
-                                    <p class="text-success">Id</p>
-                                    <p><?= $user['id'] ?></p>
-                                </li>
-                                <li>
-                                    <p class="text-success">Order</p>
-                                    <p><?= count($countorder) ?></p>
-                                </li>
-                                <li>
-                                    <p class="text-success">Status</p>
-                                    <p>
-                                        <?php if ($user['status'] == 1) {
-                                            echo 'active';
-                                        } else {
-                                            echo 'Blocked';
-                                        } ?>
-                                    </p>
-                                </li>
-                            </ul>
-                            <div class="info-links">
-                                <i class="mdi mdi-account-check text-gray">Masuk :
-                                </i>
-                                <p><?= $user['created_on'] ?></p>
-                                <i class="mdi mdi-calendar text-gray">Tanggal lahir:
-                                </i>
-                                <p><?= $user['tgl_lahir'] ?></p>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -96,43 +67,44 @@
                         <hr>
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info">
-                                <?= form_open_multipart('users/ubahid'); ?>
-                                <input type="hidden" name="id" value="<?= $user['id'] ?>">
+                                <?= form_open_multipart('AdminMenu/ubahid'); ?>
+                                <input type="hidden" name="id" value="<?= $admin['id'] ?>">
                                 <div class="form-group">
                                     <label for="name">Nama</label>
-                                    <input type="text" class="form-control" id="name" name="fullnama" value="<?= $user['fullnama'] ?>" required>
+                                    <input type="text" class="form-control" id="name" name="user_name" value="<?= $admin['user_name'] ?>" required>
                                 </div>
 
                                 <label class="text-small">Nomor hp</label>
+                                    <!-- <?= $admin['admin_role'] ?> -->
                                 <div class="row">
+                            <select class="form-control" name="admin_role" id="admin_role">
 
-                                    <div class="form-group col-2">
-                                        <input type="tel" id="txtPhone" class="form-control" name="countrycode" value="<?= $user['countrycode'] ?>" required>
-                                    </div>
-                                    <div class=" form-group col-10">
-                                        <input type="text" class="form-control" id="phone" name="phone" value="<?= $user['phone'] ?>" required>
-                                    </div>
-                                </div>
+                                        <option value="0" <?php if($admin['admin_role']==0){?> selected<?php }?> >Admin</option>
+                                        <option value="1" <?php if($admin['admin_role']==1){?> selected<?php }?> >Super Admin</option>
+                                    </select>
 
-                                <div class="form-group">
-                                    <label for="tgl_lahir">Tanggal Lahir</label>
-                                    <input type="date" class="form-control" id="tgl_lahir" name="tgl_lahir" value="<?= $user['tgl_lahir'] ?>" required>
+
+                                    <!-- <div class=" form-group col-10">
+                                        <input type="text" class="form-control" id="admin_role" name="admin_role" value="<?= $admin['admin_role'] ?>" required>
+                                    </div> -->
                                 </div>
 
                                 <div class="form-group">
                                     <label for="email">Email</label>
-                                    <input type="email" class="form-control" id="email" name="email" value="<?= $user['email'] ?>" placeholder="Change email address" required>
+                                    <input type="email" class="form-control" id="email" name="email" value="<?= $admin['email'] ?>" placeholder="Change email address" required>
                                 </div>
                                 <div class="form-group mt-5">
                                     <button type="submit" class="btn btn-success mr-2">Perbarui</button>
-                                    <button class="btn btn-outline-danger">Batal</button>
+
+                                    <a class="col-auto btn btn-danger text-white" href="<?= base_url() ?>AdminMenu">
+                                    <i class="mdi mdi-keyboard-backspace text-white"></i>Batal</a>
                                 </div>
                                 <?= form_close(); ?>
                             </div>
                             <div class="tab-pane fade" id="avatar" role="tabpanel" aria-labelledby="avatar-tab">
                                 <?= form_open_multipart('users/ubahfoto'); ?>
-                                <input type="hidden" name="id" value="<?= $user['id'] ?>">
-                                <input type="file" name="fotopelanggan" class="dropify" data-max-file-size="1mb" data-default-file="<?= base_url('images/pelanggan/') . $user['fotopelanggan'] ?>" />
+                                <input type="hidden" name="id" value="<?= $admin['id'] ?>">
+                                <input type="file" name="fotopelanggan" class="dropify" data-max-file-size="1mb" data-default-file="<?= base_url('images/admin/') . $admin['image'] ?>" />
                                 <div class="form-group mt-5">
                                     <button type="submit" class="btn btn-success mr-2">Perbarui</button>
                                     <button class="btn btn-outline-danger">Batal</button>
@@ -141,7 +113,7 @@
                             </div>
                             <div class="tab-pane fade" id="security" role="tabpanel" aria-labelledby="security-tab">
                                 <?= form_open_multipart('users/ubahpass'); ?>
-                                <input type="hidden" name="id" value="<?= $user['id'] ?>">
+                                <input type="hidden" name="id" value="<?= $admin['id'] ?>">
                                 <div class="form-group">
                                     <input type="password" class="form-control" id="new-password" name="password" placeholder="Enter you new password" required>
                                 </div>
@@ -161,7 +133,7 @@
 <!-- content-wrapper ends -->
 <script type="text/javascript">
     $(function() {
-        var code = "<?= $user['countrycode'] ?>"; // Assigning value from model.
+        var code = "<?= $admin['countrycode'] ?>"; // Assigning value from model.
         $('#txtPhone').val(code);
         $('#txtPhone').intlTelInput({
             autoHideDialCode: true,

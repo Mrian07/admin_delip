@@ -44,49 +44,7 @@ class AdminMenu extends CI_Controller
         redirect('users');
     }
 
-    public function ubahid()
-    {
-
-        $this->form_validation->set_rules('fullnama', 'fullnama', 'trim|prep_for_form');
-        $this->form_validation->set_rules('no_telepon', 'no_telepon', 'trim|prep_for_form');
-        $this->form_validation->set_rules('email', 'email', 'trim|prep_for_form');
-        $id = html_escape($this->input->post('id', TRUE));
-
-        $countrycode = html_escape($this->input->post('countrycode', TRUE));
-        $phone = html_escape($this->input->post('phone', TRUE));
-
-        if ($this->form_validation->run() == TRUE) {
-            $data             = [
-                'phone'                     => html_escape($this->input->post('phone', TRUE)),
-                'countrycode'               => html_escape($this->input->post('countrycode', TRUE)),
-                'id'                        => html_escape($this->input->post('id', TRUE)),
-                'fullnama'                    => html_escape($this->input->post('fullnama', TRUE)),
-                'no_telepon'                => str_replace("+", "", $countrycode) . $phone,
-                'email'                        => html_escape($this->input->post('email', TRUE)),
-                'tgl_lahir'                        => html_escape($this->input->post('tgl_lahir', TRUE))
-            ];
-
-
-            if (demo == TRUE) {
-                $this->session->set_flashdata('demo', 'NOT ALLOWED FOR DEMO');
-                redirect('users/detail/' . $id);
-            } else {
-                $this->user->ubahdataid($data);
-                $this->session->set_flashdata('ubah', 'User Has Been Change');
-                redirect('users/detail/' . $id);
-            }
-        } else {
-
-            $data = $this->user->getcurrency();
-            $data['user'] = $this->user->getusersbyid($id);
-            $data['countorder'] = $this->user->countorder($id);
-            // $data['transaksi']= $this->dashboard->getAlltransaksi();
-            // $data['fitur']= $this->dashboard->getAllfitur();
-            $this->load->view('includes/header');
-            $this->load->view('users/detailusers', $data);
-            $this->load->view('includes/footer');
-        }
-    }
+   
 
     public function ubahfoto()
     {
@@ -273,12 +231,56 @@ class AdminMenu extends CI_Controller
     public function detail($id)
     {
         $data = $this->user->getcurrency();
-        $data['user'] = $this->user->getusersbyid($id);
-        $data['countorder'] = $this->user->countorder($id);
-        $data['wallet'] = $this->user->wallet($id);
+
+        $data['admin'] = $this->admin->getAdminByID($id);
+
         // $data['fitur']= $this->dashboard->getAllfitur();
         $this->load->view('includes/header');
         $this->load->view('Admin/detailusers', $data);
         $this->load->view('includes/footer');
+    }
+     public function ubahid()
+    {
+        // var_dump($_POST);die;
+
+        $this->form_validation->set_rules('fullnama', 'fullnama', 'trim|prep_for_form');
+
+        $this->form_validation->set_rules('no_telepon', 'no_telepon', 'trim|prep_for_form');
+
+        $this->form_validation->set_rules('email', 'email', 'trim|prep_for_form');
+
+        $id = html_escape($this->input->post('id', TRUE));
+
+        if ($this->form_validation->run() == TRUE) {
+            $data             = [
+                'user_name'                     => html_escape($this->input->post('user_name', TRUE)),
+                
+                'id'                        => html_escape($this->input->post('id', TRUE)),
+
+                'admin_role'                    => html_escape($this->input->post('admin_role', TRUE)),
+                
+                'email'                        => html_escape($this->input->post('email', TRUE))
+            ];
+
+
+            if (demo == TRUE) {
+                $this->session->set_flashdata('demo', 'NOT ALLOWED FOR DEMO');
+                redirect('users/detail/' . $id);
+            } else {
+                $this->admin->ubahAdminByID($data);
+                $this->session->set_flashdata('ubah', 'User Has Been Change');
+                redirect('AdminMenu/detail/' . $id);
+            }
+        } else {
+
+            $data = $this->user->getcurrency();
+            $data['user'] = $this->user->getusersbyid($id);
+            $data['countorder'] = $this->user->countorder($id);
+            // $data['transaksi']= $this->dashboard->getAlltransaksi();
+            // $data['fitur']= $this->dashboard->getAllfitur();
+            $this->load->view('includes/header');
+            $this->load->view('users/detailusers', $data);
+            $this->load->view('includes/footer');
+        }
     }
 }

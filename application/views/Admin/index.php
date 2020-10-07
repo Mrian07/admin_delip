@@ -49,7 +49,10 @@
                                                             <th>Admin Id</th>
                                                             <th>Photo Profil</th>
                                                             <th>Nama</th>
+                                                            <th>No HP</th>
                                                             <th>Email</th>
+                                                            <th>Username</th>
+                                                            <th>Wilayah</th>
                                                             <th>Status</th>
                                                             <th>Tindakan</th>
                                                         </tr>
@@ -63,9 +66,12 @@
                                                                 <td>
                                                                     <img src="<?= base_url('images/admin/') . $us['image']; ?>">
                                                                 </td>
-                                                                <td><?= $us['user_name'] ?></td>
+                                                                <td><?= $us['nama'] ?></td>
+                                                                <td><?= $us['no_telepon'] ?></td>
                                                                 <td><?= $us['email'] ?></td>
-                                                                <!-- <td><?= $us['no_telepon'] ?></td> -->
+                                                                <td><?= $us['user_name'] ?></td>
+                                                                <td><?= $us['wilayah'] ?></td>
+
                                                                 <td>
                                                                     <?php if ($us['admin_role'] == 1) { ?>
                                                                         <label class="badge badge-success">Super Admin</label>

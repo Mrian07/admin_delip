@@ -77,8 +77,8 @@
                         // var_dump($SuperAdmin);
 
 
-                    if($SuperAdmin==0){
-                    // if($SuperAdmin){
+                    // if($SuperAdmin==0){
+                    if($SuperAdmin){
                         
                     
 
@@ -214,9 +214,9 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= base_url(); ?>admin">
+                            <a class="nav-link" href="<?= base_url(); ?>AdminMenu">
                                 <i class="icon-user-following menu-icon"></i>
-                                <span class="menu-title">Admin</span>
+                                <span class="menu-title">Menu Admin</span>
                             </a>
                         </li>
                         <li class="nav-item">

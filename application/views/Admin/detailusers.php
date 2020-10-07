@@ -71,10 +71,18 @@
                                 <input type="hidden" name="id" value="<?= $admin['id'] ?>">
                                 <div class="form-group">
                                     <label for="name">Nama</label>
+                                    <input type="text" class="form-control" id="nama" name="nama" value="<?= $admin['nama'] ?>" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">Username</label>
                                     <input type="text" class="form-control" id="name" name="user_name" value="<?= $admin['user_name'] ?>" required>
                                 </div>
+                                <div class="form-group">
+                                    <label for="email">Wilayah</label>
+                                    <input type="text" class="form-control" id="wilayah" name="wilayah" value="<?= $admin['wilayah'] ?>" placeholder="Change email address" required>
+                                </div>
 
-                                <label class="text-small">Nomor hp</label>
+                                <label class="text-small">Admin Role</label>
                                     <!-- <?= $admin['admin_role'] ?> -->
                                 <div class="row">
                             <select class="form-control" name="admin_role" id="admin_role">
@@ -92,6 +100,10 @@
                                 <div class="form-group">
                                     <label for="email">Email</label>
                                     <input type="email" class="form-control" id="email" name="email" value="<?= $admin['email'] ?>" placeholder="Change email address" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">No Telpon</label>
+                                    <input type="number" class="form-control" id="no_telepon" name="no_telepon" value="<?= $admin['no_telepon'] ?>" placeholder="Change email address" required>
                                 </div>
                                 <div class="form-group mt-5">
                                     <button type="submit" class="btn btn-success mr-2">Perbarui</button>

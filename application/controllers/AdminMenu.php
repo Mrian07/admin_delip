@@ -175,7 +175,13 @@ class AdminMenu extends CI_Controller
 
                 'admin_role'                    => html_escape($this->input->post('admin_role', TRUE)),
                 
-                'email'                        => html_escape($this->input->post('email', TRUE))
+                'email'                        => html_escape($this->input->post('email', TRUE)),
+
+                 'nama'                        => html_escape($this->input->post('nama', TRUE)),
+
+                  'wilayah'                        => html_escape($this->input->post('wilayah', TRUE)),
+
+                   'no_telepon'                        => html_escape($this->input->post('no_telepon', TRUE))
             ];
 
 

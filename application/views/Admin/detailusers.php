@@ -112,7 +112,7 @@
                                 <?= form_close(); ?>
                             </div>
                             <div class="tab-pane fade" id="security" role="tabpanel" aria-labelledby="security-tab">
-                                <?= form_open_multipart('users/ubahpass'); ?>
+                                <?= form_open_multipart('AdminMenu/ubahpass'); ?>
                                 <input type="hidden" name="id" value="<?= $admin['id'] ?>">
                                 <div class="form-group">
                                     <input type="password" class="form-control" id="new-password" name="password" placeholder="Enter you new password" required>

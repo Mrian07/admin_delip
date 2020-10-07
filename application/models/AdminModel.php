@@ -61,6 +61,13 @@ public function login(){
         $this->db->where('id', $data['id']);
         $this->db->update('admin', $data);
     }
+        public function ubahdatapassword($data)
+    {
+        $this->db->set('password', $data['password']);
+
+        $this->db->where('id', $data['id']);
+        $this->db->update('admin', $data);
+    }
 
 
 

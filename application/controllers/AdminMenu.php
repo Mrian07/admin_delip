@@ -43,46 +43,6 @@ class AdminMenu extends CI_Controller
         $this->session->set_flashdata('block', 'unblock');
         redirect('users');
     }
-
-   
-
-   
-
-    public function ubahpass()
-    {
-
-        $this->form_validation->set_rules('password', 'password', 'trim|prep_for_form');
-
-        if ($this->form_validation->run() == TRUE) {
-            $id = $this->input->post('id');
-            $data = $this->input->post('password');
-            $dataencrypt = sha1($data);
-
-            $data             = [
-                'id'            => html_escape($this->input->post('id', TRUE)),
-                'password'      => $dataencrypt
-            ];
-
-            if (demo == TRUE) {
-                $this->session->set_flashdata('demo', 'NOT ALLOWED FOR DEMO');
-                redirect('users/detail/' . $id);
-            } else {
-                $this->user->ubahdatapassword($data);
-                $this->session->set_flashdata('ubah', 'User Has Been Change');
-                redirect('users/detail/' . $id);
-            }
-        } else {
-            $data = $this->user->getcurrency();
-            $data['user'] = $this->user->getusersbyid($id);
-            $data['countorder'] = $this->user->countorder($id);
-            // $data['transaksi']= $this->dashboard->getAlltransaksi();
-            // $data['fitur']= $this->dashboard->getAllfitur();
-            $this->load->view('includes/header');
-            $this->load->view('users/detailusers', $data);
-            $this->load->view('includes/footer');
-        }
-    }
-
     public function UbahAdmin($id)
     {
         $this->admin->ubahKeAdmin($id);
@@ -282,6 +242,33 @@ class AdminMenu extends CI_Controller
             $this->load->view('includes/header');
             $this->load->view('users/detailusers', $data);
             $this->load->view('includes/footer');
+        }
+    }   
+     public function ubahpass()
+    {
+
+        $this->form_validation->set_rules('password', 'password', 'trim|prep_for_form');
+
+        if ($this->form_validation->run() == TRUE) {
+            $id = $this->input->post('id');
+            $data = $this->input->post('password');
+            $dataencrypt = sha1($data);
+
+            $data             = [
+                'id'            => html_escape($this->input->post('id', TRUE)),
+                'password'      => $dataencrypt
+            ];
+
+            if (demo == TRUE) {
+                $this->session->set_flashdata('demo', 'NOT ALLOWED FOR DEMO');
+                redirect('AdminMenu/detail/' . $id);
+            } else {
+                $this->admin->ubahdatapassword($data);
+                $this->session->set_flashdata('ubah', 'Admin Has Been Change');
+                redirect('AdminMenu/detail/' . $id);
+            }
+        } else {
+                redirect('AdminMenu');
         }
     }
 }

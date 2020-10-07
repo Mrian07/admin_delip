@@ -45,7 +45,11 @@
                     </div>
 
                     <button type="submit" class="btn btn-success mr-2">Kirim</button>
-                    <button class="btn btn-light">Batal</button>
+
+                    <a class="btn btn-primary" href="<?= base_url(); ?>AdminMenu/">
+                    Batal
+                    
+                    </a>
                     <?= form_close(); ?>
                 </div>
             </div>

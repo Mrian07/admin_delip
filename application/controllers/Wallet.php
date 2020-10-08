@@ -15,9 +15,28 @@ class Wallet extends CI_Controller
         $this->load->model('wallet_model', 'wallet');
         $this->load->model('users_model', 'user');
     }
+    public function CekSuper()
+    {
+        $id = $_SESSION['id'];
+        $sql = "SELECT * FROM admin where id = $id ";
+        $query = $this->db->query($sql)->result();
+        $SuperAdmin = $query[0]->admin_role;
+        // var_dump($SuperAdmin==0);die;
+        if ($SuperAdmin == 0) {
 
+            echo "<script>
+                    alert('Anda Tidak Punya Akses!');
+                    window.location.href='dashboard';
+                    </script>";
+            // redirect('dashboard');
+            // exit();
+        }
+
+    }
     public function index()
     {
+      $this->CekSuper();
+
 
         $data['jumlahdiskon'] = $this->wallet->getjumlahdiskon();
         $data['orderplus'] = $this->wallet->gettotalorderplus();
@@ -35,6 +54,8 @@ class Wallet extends CI_Controller
 
     public function wconfirm($id, $id_user, $amount)
     {
+        $this->CekSuper();
+
         $token = $this->wallet->gettoken($id_user);
         $regid = $this->wallet->getregid($id_user);
         $tokenmerchant = $this->wallet->gettokenmerchant($id_user);
@@ -62,6 +83,8 @@ class Wallet extends CI_Controller
 
     public function wcancel($id, $id_user)
     {
+        $this->CekSuper();
+
         $token = $this->wallet->gettoken($id_user);
         $regid = $this->wallet->getregid($id_user);
         $tokenmerchant = $this->wallet->gettokenmerchant($id_user);
@@ -85,6 +108,8 @@ class Wallet extends CI_Controller
 
     public function tconfirm($id, $id_user, $amount)
     {
+        $this->CekSuper();
+
         $token = $this->wallet->gettoken($id_user);
         $regid = $this->wallet->getregid($id_user);
         $tokenmerchant = $this->wallet->gettokenmerchant($id_user);
@@ -112,6 +137,8 @@ class Wallet extends CI_Controller
 
     public function tcancel($id, $id_user)
     {
+        $this->CekSuper();
+
         $token = $this->wallet->gettoken($id_user);
         $regid = $this->wallet->getregid($id_user);
         $tokenmerchant = $this->wallet->gettokenmerchant($id_user);
@@ -139,6 +166,8 @@ class Wallet extends CI_Controller
 
     public function tambahtopup()
     {
+        $this->CekSuper();
+
         $data['currency'] = $this->user->getcurrency();
         $data['saldo'] = $this->wallet->getallsaldouser();
 
@@ -177,6 +206,8 @@ class Wallet extends CI_Controller
 
     public function tambahwithdraw()
     {
+        $this->CekSuper();
+
         $data['currency'] = $this->user->getcurrency();
         $data['saldo'] = $this->wallet->getallsaldouser();
 

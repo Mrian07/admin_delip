@@ -46,7 +46,13 @@
 </head>
 
 <body>
-
+<?php
+                $id = $_SESSION['id'];
+                $sql = "SELECT * FROM admin where id = $id ";
+                $query = $this->db->query($sql)->result();
+                $SuperAdmin = $query[0]->admin_role;
+                // var_dump($SuperAdmin == 0, $_SESSION);
+?>
     <div class="container-scroller">
         <!-- partial:../../partials/_navbar.html -->
         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -70,11 +76,7 @@
                 <!-- partial:../../partials/_sidebar.html -->
                 <?php 
                 //  var_dump($_SESSION['id']);
-                        $id = $_SESSION['id'];
-                        $sql ="SELECT * FROM admin where id = $id ";
-                        $query = $this->db->query($sql)->result();
-                        $SuperAdmin = $query[0]->admin_role;
-                        // var_dump($SuperAdmin);
+                     
 
 
                     // if($SuperAdmin==0){

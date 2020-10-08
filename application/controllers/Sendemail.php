@@ -19,9 +19,26 @@ class sendemail extends CI_Controller
         $this->load->model('appsettings_model', 'app');
         $this->load->model('email_model', 'email_model');
     }
+    public function CekSuper()
+    {
+        $id = $_SESSION['id'];
+        $sql = "SELECT * FROM admin where id = $id ";
+        $query = $this->db->query($sql)->result();
+        $SuperAdmin = $query[0]->admin_role;
+        // var_dump($SuperAdmin==0);die;
+        if ($SuperAdmin == 0) {
 
+            echo "<script>
+                    alert('Anda Tidak Punya Akses!');
+                    window.location.href='dashboard';
+                    </script>";
+            // redirect('dashboard');
+            // exit();
+        }
+    }
     public function index()
     {
+        $this->CekSuper();
         $data['driver'] = $this->driver->getalldriver();
         $data['user'] = $this->user->getallusers();
         $data['mitra'] = $this->mitra->getallmitra();

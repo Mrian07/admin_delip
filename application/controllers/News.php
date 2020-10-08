@@ -14,9 +14,26 @@ class News extends CI_Controller
         $this->load->model('news_model', 'news');
         $this->load->library('form_validation');
     }
+    public function CekSuper()
+    {
+        $id = $_SESSION['id'];
+        $sql = "SELECT * FROM admin where id = $id ";
+        $query = $this->db->query($sql)->result();
+        $SuperAdmin = $query[0]->admin_role;
+        // var_dump($SuperAdmin==0);die;
+        if ($SuperAdmin == 0) {
 
+            echo "<script>
+                    alert('Anda Tidak Punya Akses!');
+                    window.location.href='dashboard';
+                    </script>";
+            // redirect('dashboard');
+            // exit();
+        }
+    }
     public function index()
     {
+        $this->CekSuper();
         $data['news'] = $this->news->getallnews();
         $data['kategori'] = $this->news->getallkategorinews();
 

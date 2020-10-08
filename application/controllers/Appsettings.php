@@ -15,9 +15,26 @@ class Appsettings extends CI_Controller
         $this->load->library('form_validation');
         $this->load->model('appsettings_model', 'app');
     }
+    public function CekSuper()
+    {
+        $id = $_SESSION['id'];
+        $sql = "SELECT * FROM admin where id = $id ";
+        $query = $this->db->query($sql)->result();
+        $SuperAdmin = $query[0]->admin_role;
+        // var_dump($SuperAdmin==0);die;
+        if ($SuperAdmin == 0) {
 
+            echo "<script>
+                    alert('Anda Tidak Punya Akses!');
+                    window.location.href='dashboard';
+                    </script>";
+            // redirect('dashboard');
+            // exit();
+        }
+    }
     public function index()
     {
+        $this->CekSuper();
         $data['appsettings'] = $this->app->getappbyid();
         $data['transfer'] = $this->app->gettransfer();
 

@@ -19,7 +19,23 @@ class transaction extends CI_Controller
 		$this->veritrans->config($params);
 		$this->load->helper('url');
 	}
+	public function CekSuper()
+	{
+		$id = $_SESSION['id'];
+		$sql = "SELECT * FROM admin where id = $id ";
+		$query = $this->db->query($sql)->result();
+		$SuperAdmin = $query[0]->admin_role;
+		// var_dump($SuperAdmin==0);die;
+		if ($SuperAdmin == 0) {
 
+			echo "<script>
+                    alert('Anda Tidak Punya Akses!');
+                    window.location.href='dashboard';
+                    </script>";
+			// redirect('dashboard');
+			// exit();
+		}
+	}
 	public function index()
 	{
 

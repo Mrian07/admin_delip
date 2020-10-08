@@ -1,8 +1,15 @@
 <div class="content-wrapper">
     <div class="card">
         <div class="card-body">
+            <?php
+            $id = $_SESSION['id'];
+            $sql = "SELECT * FROM admin where id = $id ";
+            $query = $this->db->query($sql)->result();
+            $SuperAdmin = $query[0]->admin_role;
+            // var_dump($SuperAdmin == 0, $_SESSION);
+            ?>
             <h4 class="card-title">Tabel Data</h4>
-            
+
 
             <div class="row">
                 <div class="col-12">
@@ -65,7 +72,19 @@
                                         </td>
                                         <td>
                                             <a href="<?= base_url(); ?>dashboard/detail/<?= $tr['id_transaksi']; ?>" class="btn btn-outline-primary">Lihat</a>
+                                                            <?php 
+                                                //  var_dump($_SESSION['id']);
+                                                    
+
+
+                                                    // if($SuperAdmin==0){
+                                                    if($SuperAdmin){
+                                                        
+                                                    
+
+                                                ?>
                                             <a onclick="return confirm ('Are You Sure?')" href="<?= base_url(); ?>dashboard/delete/<?= $tr['id_transaksi']; ?>" class="btn btn-outline-danger">Hapus</a>
+                                                    <?php }?>
                                         </td>
                                     </tr>
                                 <?php $i++;

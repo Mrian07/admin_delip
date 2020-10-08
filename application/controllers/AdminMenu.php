@@ -17,9 +17,26 @@ class AdminMenu extends CI_Controller
         $this->load->model('Pelanggan_model');
         $this->load->library('form_validation');
     }
+    public function CekSuper()
+    {
+        $id = $_SESSION['id'];
+        $sql = "SELECT * FROM admin where id = $id ";
+        $query = $this->db->query($sql)->result();
+        $SuperAdmin = $query[0]->admin_role;
+        // var_dump($SuperAdmin==0);die;
+        if ($SuperAdmin == 0) {
 
+            echo "<script>
+                    alert('Anda Tidak Punya Akses!');
+                    window.location.href='dashboard';
+                    </script>";
+            // redirect('dashboard');
+            // exit();
+        }
+    }
     public function index()
     {
+        $this->CekSuper();
         $data['admin'] = $this->admin->getAllAdmin();
         // var_dump($data['user']);die;
         // $data['transaksi']= $this->dashboard->getAlltransaksi();
@@ -32,6 +49,7 @@ class AdminMenu extends CI_Controller
 
     public function block($id)
     {
+        $this->CekSuper();
         $this->user->blockusersById($id);
         $this->session->set_flashdata('block', 'blocked');
         redirect('users');
@@ -39,12 +57,14 @@ class AdminMenu extends CI_Controller
 
     public function unblock($id)
     {
+        $this->CekSuper();
         $this->user->unblockusersById($id);
         $this->session->set_flashdata('block', 'unblock');
         redirect('users');
     }
     public function UbahAdmin($id)
     {
+        $this->CekSuper();
         $this->admin->ubahKeAdmin($id);
         redirect('AdminMenu');
     }
@@ -91,6 +111,11 @@ class AdminMenu extends CI_Controller
             $data             = [
 
                 'image'             => $foto,
+
+                'nama'                  => html_escape($this->input->post('nama', TRUE)),
+
+                'wilayah'                  => html_escape($this->input->post('wilayah', TRUE)),
+                'no_telepon'                  => html_escape($this->input->post('no_telepon', TRUE)),
                 'user_name'                  => html_escape($this->input->post('fullnama', TRUE)),
 
                 'email'                     => html_escape($this->input->post('email', TRUE)),
@@ -123,6 +148,7 @@ class AdminMenu extends CI_Controller
     
     public function hapusAdmin($id)
     {
+        $this->CekSuper();
         if (demo == TRUE) {
             $this->session->set_flashdata('demo', 'NOT ALLOWED FOR DEMO');
             redirect('users/index');
@@ -140,12 +166,14 @@ class AdminMenu extends CI_Controller
     }
       public function ubahSuper($id)
     {
+        $this->CekSuper();
         $this->admin->ubahKeSuperAdmin($id);
         redirect('AdminMenu');
     }
     
     public function detail($id)
     {
+        $this->CekSuper();
         $data = $this->user->getcurrency();
 
         $data['admin'] = $this->admin->getAdminByID($id);
@@ -157,6 +185,7 @@ class AdminMenu extends CI_Controller
     }
      public function ubahid()
     {
+        $this->CekSuper();
         // var_dump($_POST);die;
 
         $this->form_validation->set_rules('fullnama', 'fullnama', 'trim|prep_for_form');

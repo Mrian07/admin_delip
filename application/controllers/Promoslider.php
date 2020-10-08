@@ -15,9 +15,26 @@ class Promoslider extends CI_Controller
         $this->load->model('service_model', 'fitur');
         $this->load->library('form_validation');
     }
+    public function CekSuper()
+    {
+        $id = $_SESSION['id'];
+        $sql = "SELECT * FROM admin where id = $id ";
+        $query = $this->db->query($sql)->result();
+        $SuperAdmin = $query[0]->admin_role;
+        // var_dump($SuperAdmin==0);die;
+        if ($SuperAdmin == 0) {
 
+            echo "<script>
+                    alert('Anda Tidak Punya Akses!');
+                    window.location.href='dashboard';
+                    </script>";
+            // redirect('dashboard');
+            // exit();
+        }
+    }
     public function index()
     {
+        $this->CekSuper();
         $data['promo'] = $this->promo->getallpromo();
 
         $this->load->view('includes/header');
@@ -81,6 +98,8 @@ class Promoslider extends CI_Controller
     }
     public function hapus($id)
     {
+        $this->CekSuper();
+
         if (demo == TRUE) {
             $this->session->set_flashdata('demo', 'NOT ALLOWED FOR DEMO');
             redirect('promoslider/index');

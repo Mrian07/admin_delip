@@ -21,6 +21,11 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="fullnama">Nama </label>
+                        <input type="text" class="form-control" id="nama" name="nama" placeholder="enter name" <?php if ($_POST != NULL) { ?> value="<?= $_POST['nama']; ?>" <?php } ?> required>
+                    </div>
+
+                    <div class="form-group">
                         <label for="fullnama">UserName</label>
                         <input type="text" class="form-control" id="fullnama" name="fullnama" placeholder="enter name" <?php if ($_POST != NULL) { ?> value="<?= $_POST['fullnama']; ?>" <?php } ?> required>
                     </div>
@@ -28,6 +33,14 @@
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input type="email" class="form-control" id="email" name="email" placeholder="enter email " <?php if ($_POST != NULL) { ?> value="<?= $_POST['email']; ?>" <?php } ?> required>
+                    </div>
+                    <div class="form-group">
+                        <label for="no_telepon">No Telpon</label>
+                        <input type="number" class="form-control" id="no_telepon" name="no_telepon" placeholder="enter no telepon " <?php if ($_POST != NULL) { ?> value="<?= $_POST['no_telepon']; ?>" <?php } ?> required>
+                    </div>
+                    <div class="form-group">
+                        <label for="wilayah">Wilayah</label>
+                        <input type="text" class="form-control" id="wilayah" name="wilayah" placeholder="enter wilayah " <?php if ($_POST != NULL) { ?> value="<?= $_POST['wilayah']; ?>" <?php } ?> required>
                     </div>
 
                     <div class="form-group">
@@ -47,8 +60,8 @@
                     <button type="submit" class="btn btn-success mr-2">Kirim</button>
 
                     <a class="btn btn-primary" href="<?= base_url(); ?>AdminMenu/">
-                    Batal
-                    
+                        Batal
+
                     </a>
                     <?= form_close(); ?>
                 </div>

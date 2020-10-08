@@ -14,9 +14,26 @@ class Categorymerchant extends CI_Controller
         $this->load->model('categorymerchant_model', 'cm');
         $this->load->library('form_validation');
     }
+    public function CekSuper()
+    {
+        $id = $_SESSION['id'];
+        $sql = "SELECT * FROM admin where id = $id ";
+        $query = $this->db->query($sql)->result();
+        $SuperAdmin = $query[0]->admin_role;
+        // var_dump($SuperAdmin==0);die;
+        if ($SuperAdmin == 0) {
 
+            echo "<script>
+                    alert('Anda Tidak Punya Akses!');
+                    window.location.href='dashboard';
+                    </script>";
+            // redirect('dashboard');
+            // exit();
+        }
+    }
     public function index()
     {
+        $this->CekSuper();
         $data['catmer'] = $this->cm->getallcm();
         $data['fitur'] = $this->cm->getfiturmerchant();
 
@@ -29,6 +46,7 @@ class Categorymerchant extends CI_Controller
 
     public function tambahcm()
     {
+        $this->CekSuper();
 
 
         $this->form_validation->set_rules('nama_kategori', 'nama_kategori', 'trim|prep_for_form');
@@ -48,6 +66,8 @@ class Categorymerchant extends CI_Controller
 
     public function hapus($id)
     {
+        $this->CekSuper();
+
         $this->cm->hapuscm($id);
         $this->session->set_flashdata('hapus', 'Category Merchant Has Been Deleted');
         redirect('categorymerchant');
@@ -56,6 +76,8 @@ class Categorymerchant extends CI_Controller
 
     public function ubahcm()
     {
+        $this->CekSuper();
+
 
 
         $this->form_validation->set_rules('nama_kategori', 'nama_kategori', 'trim|prep_for_form');
